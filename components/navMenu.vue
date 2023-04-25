@@ -24,6 +24,7 @@ import logo from "./logo.vue";
   justify-content: space-between;
   font-family: var(--general-font);
   color: var(--general-text-color);
+  padding-top: 40px;
 }
 
 .menu_container {
@@ -33,7 +34,6 @@ import logo from "./logo.vue";
   justify-content: space-around;
   align-items: center;
   padding-right: 30px;
-  padding-top:30px;
 }
 
 .watch_button {

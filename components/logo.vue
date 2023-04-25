@@ -9,7 +9,6 @@
 .logo {
   display: flex;
   flex-direction: column;
-  padding-top: 40px;
   padding-left: 40px;
   font-weight: 400;
   font-size: 30px;
