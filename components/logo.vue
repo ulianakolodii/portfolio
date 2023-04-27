@@ -1,15 +1,15 @@
 <script setup>
-const firstLineRef = ref(null);
-const secondLineRef = ref(null);
+const firstLineRef = ref();
+const secondLineRef = ref();
 
-const startLogo = () => {
+const startLogoAnimation = () => {
   firstLineRef.value.classList.remove("running-right");
   firstLineRef.value.classList.add("running-left");
   secondLineRef.value.classList.remove("running-left");
   secondLineRef.value.classList.add("running-right");
 };
 
-const endLogo = () => {
+const endLogoAnimation = () => {
   firstLineRef.value.classList.remove("running-left");
   firstLineRef.value.classList.add("running-right");
   secondLineRef.value.classList.remove("running-right");
@@ -18,9 +18,17 @@ const endLogo = () => {
 </script>
 
 <template>
-  <div class="logo" @mouseover="startLogo" @mouseleave="endLogo">
-    <p class="first_line" ref="firstLineRef">PORT</p>
-    <p class="second_line" ref="secondLineRef">FOLIO</p>
+  <div
+    class="logo"
+    @mouseover="startLogoAnimation"
+    @mouseleave="endLogoAnimation"
+  >
+    <div class="first_line">
+      <p ref="firstLineRef">PORT</p>
+    </div>
+    <div class="second_line">
+      <p ref="secondLineRef">FOLIO</p>
+    </div>
   </div>
 </template>
 
@@ -31,16 +39,17 @@ const endLogo = () => {
   margin-left: 40px;
   font-weight: 400;
   font-size: 30px;
-  overflow: hidden;
 }
 
 .first_line {
   width: 80px;
+  overflow: hidden;
 }
 
 .second_line {
   width: 90px;
   margin-left: 30px;
+  overflow: hidden;
 }
 
 .running-left {

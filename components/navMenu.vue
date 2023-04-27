@@ -1,5 +1,22 @@
 <script setup lang="ts">
 import logo from "./logo.vue";
+
+const firstMenuLineRef = ref();
+const secondMenuLineRef = ref();
+
+const startMenuAnimation = () => {
+  firstMenuLineRef.value.classList.remove("running-right");
+  firstMenuLineRef.value.classList.add("running-left");
+  secondMenuLineRef.value.classList.remove("running-left");
+  secondMenuLineRef.value.classList.add("running-right");
+};
+
+const endMenuAnimation = () => {
+  firstMenuLineRef.value.classList.remove("running-left");
+  firstMenuLineRef.value.classList.add("running-right");
+  secondMenuLineRef.value.classList.remove("running-right");
+  secondMenuLineRef.value.classList.add("running-left");
+};
 </script>
 
 <template>
@@ -7,9 +24,17 @@ import logo from "./logo.vue";
     <logo />
     <div class="menu_container">
       <button class="watch_button">watch smth</button>
-      <div class="menu_title">
-        <p>ME</p>
-        <p class="second_line">NU</p>
+      <div
+        class="menu_title"
+        @mouseover="startMenuAnimation"
+        @mouseleave="endMenuAnimation"
+      >
+        <div class="first_menu_line">
+          <p ref="firstMenuLineRef">ME</p>
+        </div>
+        <div class="second_menu_line">
+          <p ref="secondMenuLineRef">NU</p>
+        </div>
       </div>
     </div>
   </div>
@@ -55,7 +80,51 @@ import logo from "./logo.vue";
   font-size: 34px;
 }
 
-.second_line {
-  padding-left: 22px;
+.first_menu_line {
+  width: 50px;
+  overflow: hidden;
+}
+
+.second_menu_line {
+  margin-left: 22px;
+  width: 50px;
+  overflow: hidden;
+}
+
+.running-left {
+  animation: running-left 0.5s linear forwards;
+}
+.running-right {
+  animation: running-right 0.5s linear forwards;
+}
+
+@keyframes running-left {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(120%);
+  }
+  51% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes running-right {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-120%);
+  }
+  51% {
+    transform: translateX(120%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 </style>
