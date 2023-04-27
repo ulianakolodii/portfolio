@@ -92,10 +92,10 @@ const endMenuAnimation = () => {
 }
 
 .running-left {
-  animation: running-left 0.5s linear forwards;
+  animation: running-left 0.3s linear forwards;
 }
 .running-right {
-  animation: running-right 0.5s linear forwards;
+  animation: running-right 0.3s linear forwards;
 }
 
 @keyframes running-left {
@@ -103,10 +103,10 @@ const endMenuAnimation = () => {
     transform: translateX(0);
   }
   50% {
-    transform: translateX(120%);
+    transform: translateX(100%);
   }
   51% {
-    transform: translateX(-120%);
+    transform: translateX(-100%);
   }
   100% {
     transform: translateX(0);
@@ -118,10 +118,10 @@ const endMenuAnimation = () => {
     transform: translateX(0);
   }
   50% {
-    transform: translateX(-120%);
+    transform: translateX(-100%);
   }
   51% {
-    transform: translateX(120%);
+    transform: translateX(100%);
   }
   100% {
     transform: translateX(0);

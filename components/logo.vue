@@ -1,19 +1,19 @@
 <script setup>
 const firstLineRef = ref();
 const secondLineRef = ref();
+let firstLinePos = 0;
+let secondLinePos = 0;
 
 const startLogoAnimation = () => {
-  firstLineRef.value.classList.remove("running-right");
-  firstLineRef.value.classList.add("running-left");
-  secondLineRef.value.classList.remove("running-left");
-  secondLineRef.value.classList.add("running-right");
+  firstLinePos = firstLineRef.value.getBoundingClientRect().width;
+  secondLinePos = secondLineRef.value.getBoundingClientRect().width;
+  firstLineRef.value.style.transform = `translateX(${firstLinePos}px)`;
+  secondLineRef.value.style.transform = `translateX(-${secondLinePos + 4}px)`;
 };
 
 const endLogoAnimation = () => {
-  firstLineRef.value.classList.remove("running-left");
-  firstLineRef.value.classList.add("running-right");
-  secondLineRef.value.classList.remove("running-right");
-  secondLineRef.value.classList.add("running-left");
+  firstLineRef.value.style.transform = `translateX(0)`;
+  secondLineRef.value.style.transform = `translateX(0%)`;
 };
 </script>
 
@@ -23,11 +23,11 @@ const endLogoAnimation = () => {
     @mouseover="startLogoAnimation"
     @mouseleave="endLogoAnimation"
   >
-    <div class="first_line">
-      <p ref="firstLineRef">PORT</p>
+    <div class="first_line_container">
+      <p class="first_line" ref="firstLineRef">PORT PORT</p>
     </div>
-    <div class="second_line">
-      <p ref="secondLineRef">FOLIO</p>
+    <div class="second_line_container">
+      <p class="second_line" ref="secondLineRef">FOLIO FOLIO</p>
     </div>
   </div>
 </template>
@@ -41,51 +41,37 @@ const endLogoAnimation = () => {
   font-size: 30px;
 }
 
-.first_line {
-  width: 80px;
+.first_line_container {
+  width: 90px;
   overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.first_line {
+  position: relative;
+  left: -90px;
+  transition: transform 0.3s linear;
+}
+
+.second_line_container {
+  width: 94px;
+  margin-left: 28px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.first_line_container:hover .first_line {
+  transform: translateX(-100%);
+}
+
+.second_line_container:hover .second_line {
+  transform: translateX(100%);
 }
 
 .second_line {
-  width: 90px;
-  margin-left: 30px;
-  overflow: hidden;
-}
-
-.running-left {
-  animation: running-left 0.5s linear forwards;
-}
-.running-right {
-  animation: running-right 0.5s linear forwards;
-}
-
-@keyframes running-left {
-  0% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(150%);
-  }
-  51% {
-    transform: translateX(-150%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-@keyframes running-right {
-  0% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(-150%);
-  }
-  51% {
-    transform: translateX(150%);
-  }
-  100% {
-    transform: translateX(0);
-  }
+  position: relative;
+  left: 0;
+  transition: transform 0.3s linear;
 }
 </style>
