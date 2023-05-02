@@ -1,8 +1,9 @@
 <script setup>
+import { ref } from "vue";
 const firstLineRef = ref();
 const secondLineRef = ref();
 let firstLinePos = 0;
-let secondLinePos = 0;
+let secondLinePos = 0;;
 
 const startLogoAnimation = () => {
   firstLinePos = firstLineRef.value.getBoundingClientRect().width;

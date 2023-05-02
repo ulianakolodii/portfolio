@@ -1,8 +1,23 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
+const watchTitleRef = ref();
+const startButtonAnimation = () => {
+  watchTitleRef.value.classList.remove("not_hovered");
+  watchTitleRef.value.classList.add("hovered");
+};
+const endButtonAnimation = () => {
+  watchTitleRef.value.classList.remove("hovered");
+  watchTitleRef.value.classList.add("not_hovered");
+};
+</script>
 <template>
-  <button class="watch_button">
+  <button
+    class="watch_button"
+    @mouseover="startButtonAnimation"
+    @mouseleave="endButtonAnimation"
+  >
     <span class="watch_title_container">
-      <span class="watch_title">watch smth</span>
+      <span class="watch_title" ref="watchTitleRef">watch smth</span>
     </span>
   </button>
 </template>
@@ -30,11 +45,7 @@
   overflow: hidden;
 }
 
-/* .watch_title {
-  transition: transform 0.2s linear;
-} */
-
-.watch_button:hover .watch_title {
+.watch_title.hovered {
   animation: slideUp 0.2s ease-in;
 }
 
@@ -53,7 +64,7 @@
   }
 }
 
-.watch_button .watch_title {
+.watch_title.not_hovered {
   animation: slideDown 0.2s ease-in;
 }
 
