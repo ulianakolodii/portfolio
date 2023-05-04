@@ -17,7 +17,7 @@ const startMenuAnimation = () => {
 
 const endMenuAnimation = () => {
   firstMenuLineRef.value.style.transform = `translateX(0)`;
-  secondMenuLineRef.value.style.transform = `translateX(0%)`;
+  secondMenuLineRef.value.style.transform = `translateX(0)`;
 };
 </script>
 

@@ -1,20 +1,59 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+
+const watchButtonRef = ref();
 const watchTitleRef = ref();
+let prevX = 0;
+let prevY = 0;
+let currX = 0;
+let currY = 0;
+
+onMounted(() => {
+  watchButtonRef.value.addEventListener("mousemove", (event: MouseEvent) => {
+    prevX = currX;
+    prevY = currY;
+    currX = event.clientX;
+    currY = event.clientY;
+  });
+});
+
 const startButtonAnimation = () => {
+  let distX = currX - prevX;
+  let distY = currY - prevY;
+
+  if (distX < 3 && distX > -3 && distY < 3 && distY > -3) {
+    watchButtonRef.value.style.transform = `translate3d(${distX * 0.3}px, ${
+      distY * 0.3
+    }px, 0)`;
+  }
+};
+
+const endButtonAnimation = () => {
+  watchButtonRef.value.style.left = 0 + "px";
+  watchButtonRef.value.style.top = 0 + "px";
+};
+
+const startTitleAnimation = () => {
   watchTitleRef.value.classList.remove("not_hovered");
   watchTitleRef.value.classList.add("hovered");
 };
-const endButtonAnimation = () => {
+const endTitleAnimation = () => {
   watchTitleRef.value.classList.remove("hovered");
   watchTitleRef.value.classList.add("not_hovered");
+};
+
+const endAnimation = () => {
+  endButtonAnimation();
+  endTitleAnimation();
 };
 </script>
 <template>
   <button
     class="watch_button"
-    @mouseover="startButtonAnimation"
-    @mouseleave="endButtonAnimation"
+    @mousemove="startButtonAnimation"
+    @mouseover="startTitleAnimation"
+    @mouseleave="endAnimation"
+    ref="watchButtonRef"
   >
     <span class="watch_title_container">
       <span class="watch_title" ref="watchTitleRef">watch smth</span>
@@ -46,7 +85,7 @@ const endButtonAnimation = () => {
 }
 
 .watch_title.hovered {
-  animation: slideUp 0.2s ease-in;
+  animation: slideUp 0.3s ease-in;
 }
 
 @keyframes slideUp {
@@ -65,7 +104,7 @@ const endButtonAnimation = () => {
 }
 
 .watch_title.not_hovered {
-  animation: slideDown 0.2s ease-in;
+  animation: slideDown 0.3s ease-in;
 }
 
 @keyframes slideDown {
