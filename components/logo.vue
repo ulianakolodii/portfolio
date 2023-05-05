@@ -40,6 +40,7 @@ const endLogoAnimation = () => {
   margin-left: 40px;
   font-weight: 400;
   font-size: 30px;
+  cursor: pointer;
 }
 
 .first_line_container {

@@ -39,6 +39,7 @@ const endMenuAnimation = () => {
 <style>
 .menu_title {
   font-size: 34px;
+  cursor: pointer;
 }
 
 .first_menu_line_container {

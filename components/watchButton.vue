@@ -76,6 +76,7 @@ const endAnimation = () => {
   letter-spacing: -0.02em;
   border: none;
   position: relative;
+  cursor: pointer;
 }
 
 .watch_title_container {
